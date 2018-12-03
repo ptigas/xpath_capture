@@ -47,14 +47,18 @@ const puppeteer = require('puppeteer');
             }
         });
     }
+    
+    // sample for a minute
+    for (var i=0; i<5; i++) {
+        await page.waitFor(10000*i);
+        await page.screenshot({path: 'fullpage_'+i+'.png', fullPage: true});
+        await screenshotDOMElement({
+            path: 'element'+i+'.png',
+            selector: '//*[@id="google_ads_iframe_3379/conde.pitchfork/rail/homepage/bundle/1_0__container__"]', // *[@id="sb_rel_my-adsMAST-iframe"]
+            padding: 16
+        });
 
-    await page.screenshot({path: 'fullpage.png', fullPage: true});
-    await page.waitFor(60000);
-    await screenshotDOMElement({
-        path: 'element.png',
-        selector: '//*[@id="google_ads_iframe_3379/conde.pitchfork/rail/homepage/bundle/1_0__container__"]', // *[@id="sb_rel_my-adsMAST-iframe"]
-        padding: 16
-    });
-
+    }
+    
     browser.close();
 })();
